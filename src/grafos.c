@@ -3,8 +3,8 @@
 
 
 typedef struct item{
-	int grau;
-	struct item* prox;
+    int grau;
+    struct item* prox;
 }ITEM;
 
 ITEM lista[TOTALVERTICES + 1];
