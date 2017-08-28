@@ -21,17 +21,21 @@ struct llista {
 llista * grafo = new llista[TOTALVERTICES];
 
 void cria_adj(int, string);
-void printa_grafo();
+void print_grafo();
+void print_desc();
 
-int main(int argc, char *argv[]) {
-    ifstream infile ("amigos.txt");
+int main() {
+    ifstream infile("amigos.txt");
     string line;
-
+    //cria lista adjacente lendo linha por linha
     for (int i = 0; i < TOTALVERTICES; i++) {
         getline(infile, line);
         cria_adj(i, line);
     }
-    printa_grafo();
+    //printa grafo
+    print_grafo();
+    //printa ids em ordem descrecente por grau
+    print_desc();
     return 0;
 }
 
@@ -50,7 +54,7 @@ void cria_adj(int i, string line) {
     }
 }
 
-void printa_grafo() {
+void print_grafo() {
     lista * amigo;
     for (int i = 0; i < TOTALVERTICES; ++i) {
         cout << "(" << grafo[i].idaluno << ") ";
@@ -61,5 +65,30 @@ void printa_grafo() {
             amigo = amigo->prox;
         }
         cout << endl;
+    }
+}
+
+int *array;
+int cmp(const void *x, const void *y) {
+    int ix = *(int *)x;
+    int iy = *(int *)y;
+    return array[ix] > array[iy] ? -1 : array[ix] < array[iy];
+}
+
+void print_desc() {
+    int keys[TOTALVERTICES];
+    int values[TOTALVERTICES];
+
+    for (int i = 0; i < TOTALVERTICES; ++i) {
+        values[i] = grafo[i].qtamigos;
+        keys[i] = i;
+    }
+
+    array = values;
+    qsort(keys, TOTALVERTICES, sizeof(*keys), cmp);
+
+    for (const int &key: keys) {
+        cout << grafo[key].idaluno << "  ";
+        cout << grafo[key].qtamigos << endl;
     }
 }
