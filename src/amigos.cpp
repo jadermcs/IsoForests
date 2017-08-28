@@ -80,8 +80,8 @@ void print_desc() {
     int values[TOTALVERTICES];
 
     for (int i = 0; i < TOTALVERTICES; ++i) {
-        values[i] = grafo[i].qtamigos;
         keys[i] = i;
+        values[i] = grafo[i].qtamigos;
     }
 
     array = values;
