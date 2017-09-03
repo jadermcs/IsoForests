@@ -3,7 +3,7 @@
 #include <fstream>
 #include <string>
 
-#define TOTALVERTICES 39
+#define TOTALVERTICES 49
 
 using namespace std;
 
