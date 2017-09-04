@@ -4,7 +4,6 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <bitset>
 
 #define TOTALVERTICES 49
 #define PESOMIN 5
@@ -14,13 +13,13 @@ using namespace std;
 
 struct lista {
     int idaluno;
-    lista * prox;
+    lista *prox;
 };
 
 struct llista {
     int idaluno;
     int qtamigos = 0;
-    lista * prox;
+    lista *prox;
 };
 int n = TOTALVERTICES;
 vector<ll> v, ne;
@@ -34,7 +33,7 @@ void bron_kerbosch(ll, ll, ll);
 int main() {
     ifstream infile("amigos.txt");
     string line;
-    lista * amigo;
+    lista *amigo;
     //cria lista adjacente lendo linha por linha
     for (int i = 0; i < TOTALVERTICES; i++) {
         getline(infile, line);
@@ -54,7 +53,7 @@ int main() {
             continue;
         amigo = grafo[i].prox;
         while (amigo != NULL) {
-            ne[i] |= (1LL << amigo->idaluno);
+            ne[i] |= (1LL << (amigo->idaluno));
             amigo = amigo->prox;
         }
     }
