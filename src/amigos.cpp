@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <bitset>
 
 #define TOTALVERTICES 49
 #define PESOMIN 5
@@ -21,7 +22,7 @@ struct llista {
     int qtamigos = 0;
     lista * prox;
 };
-
+int n = TOTALVERTICES;
 vector<ll> v, ne;
 llista * grafo = new llista[TOTALVERTICES];
 
@@ -40,21 +41,26 @@ int main() {
         cria_adj(i, line);
     }
     //printa grafo
+    cout << "LISTA DE ADJACENCIAS" << endl;
     print_grafo();
     //printa ids em ordem descrecente por grau
+    cout << "ORDEM DESCRECENTE POR GRAU" << endl;
     print_desc();
     //cliques do grafo maiores que 5
     ne.resize(TOTALVERTICES, 0);
-
+    //bitmask para operacoes de conjunto seguindo essa implementacao https://gist.github.com/gaoyuan/5042022
     for (int i = 0; i < TOTALVERTICES; ++i) {
+        if (!grafo[i].qtamigos)
+            continue;
         amigo = grafo[i].prox;
         while (amigo != NULL) {
             ne[i] |= (1LL << amigo->idaluno);
             amigo = amigo->prox;
         }
     }
-    bron_kerbosch(0LL, ~0LL, 0LL);
-    for (int i = 0; i < v.size(); i ++) cout << v[i] << endl;
+    cout << ne.size() << endl;
+    bron_kerbosch(0, ~0LL, 0);
+    //for (int i = 0; i < v.size(); i ++) cout << v[i] << endl;
     return 0;
 }
 
@@ -111,19 +117,17 @@ void print_desc() {
     }
 }
 
+
+
 void bron_kerbosch(ll R, ll P, ll X){
-    if ((P == 0LL) && (X == 0LL)) {
-        v.push_back(R);
-        return;
-    }
+    if ((P == 0LL) && (X == 0LL)) {v.push_back(R);return;}
     int u = 0;
-    for (; u < TOTALVERTICES; u++)
-        if ((P|X) & (1LL << u))
-            break;
-    for (int i = 0; i < TOTALVERTICES; i ++)
-        if ((P&~ne[u]) & (1LL << i)){
+    for (; u < n; u ++) if ( (P|X) & (1LL << u) ) break;
+    for (int i = 0; i < n; i ++)
+        if ( (P&~ne[u]) & (1LL << i) ){
+            cout << i << endl;
             bron_kerbosch(R | (1LL << i), P & ne[i], X & ne[i]);
             P -= (1LL << i);
             X |= (1LL << i);
-        }
-}
+            }
+ }
