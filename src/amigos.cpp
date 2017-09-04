@@ -53,11 +53,11 @@ int main() {
             continue;
         amigo = grafo[i].prox;
         while (amigo != NULL) {
-            ne[i] |= (1LL << (amigo->idaluno));
+            ne[i] |= (1LL << (amigo->idaluno -1));
             amigo = amigo->prox;
         }
     }
-    cout << ne.size() << endl;
+    //cout << ne.size() << endl;
     bron_kerbosch(0, ~0LL, 0);
     //for (int i = 0; i < v.size(); i ++) cout << v[i] << endl;
     return 0;
@@ -119,14 +119,18 @@ void print_desc() {
 
 
 void bron_kerbosch(ll R, ll P, ll X){
-    if ((P == 0LL) && (X == 0LL)) {v.push_back(R);return;}
+    if ((P == 0LL) && (X == 0LL)) {
+	    cout << R << endl;
+	    v.push_back(R);
+	    return;
+    }
     int u = 0;
     for (; u < n; u ++) if ( (P|X) & (1LL << u) ) break;
     for (int i = 0; i < n; i ++)
         if ( (P&~ne[u]) & (1LL << i) ){
-            cout << i << endl;
+		cout << i << " ,";
             bron_kerbosch(R | (1LL << i), P & ne[i], X & ne[i]);
             P -= (1LL << i);
             X |= (1LL << i);
-            }
+	    }
  }
