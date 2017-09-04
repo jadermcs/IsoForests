@@ -49,7 +49,9 @@ int main() {
     //cliques do grafo maiores que 5
     cout << "CLIQUES" << endl;
     ne.resize(TOTALVERTICES, 0);
-    //bitmask para operacoes de conjunto seguindo essa implementacao https://gist.github.com/gaoyuan/5042022
+    //bitmask para operacoes de conjunto
+    //cria uma palavra de 64bits para armazenar o conjunto em que o indice de cada
+    //elemento corresponde a sua posição ex: 1001001 = {7,4,1}
     for (int i = 0; i < TOTALVERTICES; ++i) {
         if (!grafo[i].qtamigos)
             continue;
@@ -59,8 +61,11 @@ int main() {
             amigo = amigo->prox;
         }
     }
-    //cout << ne.size() << endl;
+    //utiliza do Bron-Kerbosch com operações binarias simulando
+    //operacoes de conjunto para achar cliques no grafico e salva no vetor v
     bron_kerbosch(0, ~0LL, 0);
+    //desfaz o bitmask aplicado gerando o respectivo valor em decimal
+    //e retorno o clique em forma legivel de v
     for (int i = 0; i < int(v.size()); i ++)
         debitmask(v[i]);
     return 0;
@@ -121,20 +126,20 @@ void print_desc() {
 
 
 
-void bron_kerbosch(ll R, ll P, ll X){
-    if ((P == 0LL) && (X == 0LL)) {
-        v.push_back(R);
+void bron_kerbosch(ll r, ll p, ll x){
+    if ((p == 0LL) && (x == 0LL)) {
+        v.push_back(r);
         return;
     }
     int u = 0;
     for (; u < n; u ++)
-        if ( (P|X) & (1LL << u) )
+        if ( (p|x) & (1LL << u) )
             break;
     for (int i = 0; i < n; i ++)
-        if ( (P&~ne[u]) & (1LL << i) ){
-            bron_kerbosch(R | (1LL << i), P & ne[i], X & ne[i]);
-            P -= (1LL << i);
-            X |= (1LL << i);
+        if ( (p&~ne[u]) & (1LL << i) ){
+            bron_kerbosch(r | (1LL << i), p & ne[i], x & ne[i]);
+            p -= (1LL << i);
+            x |= (1LL << i);
         }
  }
 
