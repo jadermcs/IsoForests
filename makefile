@@ -28,7 +28,7 @@ CPP_FILES = $(wildcard $(SRC_PATH)/*.cpp)
 OBJ_FILES = $(addprefix $(BIN_PATH)/,$(notdir $(CPP_FILES:.cpp=.o)))
 DEP_FILES = $(wildcard $(DEP_PATH)/*.d)
 
-EXEC = TrabalhoPratico_1
+EXEC = trabalho.out
 
 # Caso o Sistema Operacional seja Windows, modifica-se as seguintes variáveis:
 ifeq ($(OS),Windows_NT)
