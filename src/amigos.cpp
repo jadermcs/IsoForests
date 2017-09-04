@@ -29,6 +29,7 @@ void cria_adj(int, string);
 void print_grafo();
 void print_desc();
 void bron_kerbosch(ll, ll, ll);
+void debitmask(ll);
 
 int main() {
     ifstream infile("amigos.txt");
@@ -46,6 +47,7 @@ int main() {
     cout << "ORDEM DESCRECENTE POR GRAU" << endl;
     print_desc();
     //cliques do grafo maiores que 5
+    cout << "CLIQUES" << endl;
     ne.resize(TOTALVERTICES, 0);
     //bitmask para operacoes de conjunto seguindo essa implementacao https://gist.github.com/gaoyuan/5042022
     for (int i = 0; i < TOTALVERTICES; ++i) {
@@ -59,7 +61,8 @@ int main() {
     }
     //cout << ne.size() << endl;
     bron_kerbosch(0, ~0LL, 0);
-    //for (int i = 0; i < v.size(); i ++) cout << v[i] << endl;
+    for (int i = 0; i < int(v.size()); i ++)
+        debitmask(v[i]);
     return 0;
 }
 
@@ -120,17 +123,32 @@ void print_desc() {
 
 void bron_kerbosch(ll R, ll P, ll X){
     if ((P == 0LL) && (X == 0LL)) {
-	    cout << R << endl;
-	    v.push_back(R);
-	    return;
+        v.push_back(R);
+        return;
     }
     int u = 0;
-    for (; u < n; u ++) if ( (P|X) & (1LL << u) ) break;
+    for (; u < n; u ++)
+        if ( (P|X) & (1LL << u) )
+            break;
     for (int i = 0; i < n; i ++)
         if ( (P&~ne[u]) & (1LL << i) ){
-		cout << i << " ,";
             bron_kerbosch(R | (1LL << i), P & ne[i], X & ne[i]);
             P -= (1LL << i);
             X |= (1LL << i);
-	    }
+        }
  }
+
+void debitmask(ll setc) {
+    vector<int> clique;
+    for (int i = 0; i < TOTALVERTICES; ++i) {
+        if (((~setc | 1LL) & (setc)) == 1LL)
+            clique.push_back(i+1);
+        setc >>= 1;
+    }
+    if (clique.size() > 4) {
+        cout << "{";
+        for (auto i = clique.begin(); i != clique.end()-1; ++i)
+            cout << *i << ",";
+        cout << clique.back() << "}\n";
+    }
+}
