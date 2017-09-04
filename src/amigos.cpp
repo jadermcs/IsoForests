@@ -1,9 +1,13 @@
 #include <iostream>
+#include <algorithm>
 #include <sstream>
 #include <fstream>
 #include <string>
+#include <vector>
 
 #define TOTALVERTICES 49
+#define PESOMIN 5
+typedef long long ll;
 
 using namespace std;
 
@@ -18,15 +22,18 @@ struct llista {
     lista * prox;
 };
 
+vector<ll> v, ne;
 llista * grafo = new llista[TOTALVERTICES];
 
 void cria_adj(int, string);
 void print_grafo();
 void print_desc();
+void bron_kerbosch(ll, ll, ll);
 
 int main() {
     ifstream infile("amigos.txt");
     string line;
+    lista * amigo;
     //cria lista adjacente lendo linha por linha
     for (int i = 0; i < TOTALVERTICES; i++) {
         getline(infile, line);
@@ -36,6 +43,18 @@ int main() {
     print_grafo();
     //printa ids em ordem descrecente por grau
     print_desc();
+    //cliques do grafo maiores que 5
+    ne.resize(TOTALVERTICES, 0);
+
+    for (int i = 0; i < TOTALVERTICES; ++i) {
+        amigo = grafo[i].prox;
+        while (amigo != NULL) {
+            ne[i] |= (1LL << amigo->idaluno);
+            amigo = amigo->prox;
+        }
+    }
+    bron_kerbosch(0LL, ~0LL, 0LL);
+    for (int i = 0; i < v.size(); i ++) cout << v[i] << endl;
     return 0;
 }
 
@@ -58,7 +77,6 @@ void print_grafo() {
     lista * amigo;
     for (int i = 0; i < TOTALVERTICES; ++i) {
         cout << "(" << grafo[i].idaluno << ") ";
-        amigo = new lista;
         amigo = grafo[i].prox;
         while (amigo != NULL) {
             cout << amigo->idaluno << ",";
@@ -91,4 +109,21 @@ void print_desc() {
         cout << grafo[key].idaluno << "  ";
         cout << grafo[key].qtamigos << endl;
     }
+}
+
+void bron_kerbosch(ll R, ll P, ll X){
+    if ((P == 0LL) && (X == 0LL)) {
+        v.push_back(R);
+        return;
+    }
+    int u = 0;
+    for (; u < TOTALVERTICES; u++)
+        if ((P|X) & (1LL << u))
+            break;
+    for (int i = 0; i < TOTALVERTICES; i ++)
+        if ((P&~ne[u]) & (1LL << i)){
+            bron_kerbosch(R | (1LL << i), P & ne[i], X & ne[i]);
+            P -= (1LL << i);
+            X |= (1LL << i);
+        }
 }
