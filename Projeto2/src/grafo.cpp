@@ -85,21 +85,24 @@ void Grafo::printPath(int parent[], int j) {
 void Grafo::printSolution(int dist[], int n, int parent[]) {
     int src = 0;
     printf("Vertex\t  Distance\t\tPath");
-    for (int i = 1; i < V; i++) {
-        printf("\n%d -> %d \t\t %d\t\t%d ", src, i, dist[i], src);
-        printPath(parent, i);
-    }
+    printf("\n%d -> %d \t\t %d\t\t%d ", src, n, dist[n], src);
+    printPath(parent, n);
+    // for (int i = 1; i < V; i++) {
+    //     printf("\n%d -> %d \t\t %d\t\t%d ", src, i, dist[i], src);
+    //     printPath(parent, i);
+    // }
+    
 }
 
 int main() {
   Grafo g(5);
   g.addAresta(0, 1, 4); // addAresta(v1, v2, custo)
   g.addAresta(0, 2, 2);
-  g.addAresta(0, 3, 5);
+  g.addAresta(0, 3, 2);
   g.addAresta(1, 4, 1);
   g.addAresta(2, 1, 1);
   g.addAresta(2, 3, 2);
-  g.addAresta(2, 4, 1);
+  g.addAresta(2, 4, 7);
   g.addAresta(3, 4, 1);
   g.dijkstra(0, 4);
   cout << endl;
