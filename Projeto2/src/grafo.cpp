@@ -69,6 +69,7 @@ void Grafo::dijkstra(int orig, int dest) {
       }
     }
   }
+  cout << dist[dest] << endl;
   printSolution(dist, dest, parent);
 }
 
@@ -96,14 +97,14 @@ void Grafo::printSolution(int dist[], int n, int parent[]) {
 int main() {
   int v1, v2, custo, nvertices;
   string line;
-  ifstream infile("disciplinas.txt");
+  ifstream infile("disciplinas2.txt");
   infile >> nvertices;
 
   Grafo g(nvertices);
   while (infile >> v1 >> v2 >> custo) {
       g.addAresta(v1, v2, custo);
   }
-  g.dijkstra(0, 4);
+  g.dijkstra(0, nvertices-1);
 
   return 0;
 }
