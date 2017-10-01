@@ -31,9 +31,11 @@ def main():
             }
 
     with open('disciplinas.txt', 'w') as fout:
+        fout.write(str(len(disciplinas.keys())) + '\n')
         for dsc in disciplinas:
             for req in disciplinas[dsc]['requisitos']:
-                fout.write(dsc + ' ' + req + ' ' + randint(1,3) + '\n')
+                fout.write(dsc + ' ' + req + ' ' +
+                           str(randint(1,3)) + '\n')
 
     pprint(disciplinas)
 

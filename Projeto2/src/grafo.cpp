@@ -92,28 +92,18 @@ void Grafo::printSolution(int dist[], int n, int parent[]) {
 }
 
 int main() {
-  Grafo g(5);
-  g.addAresta(0, 1, 4); // addAresta(v1, v2, custo)
-  g.addAresta(0, 2, 2);
-  g.addAresta(0, 3, 5);
-  g.addAresta(1, 4, 1);
-  g.addAresta(2, 1, 1);
-  g.addAresta(2, 3, 2);
-  g.addAresta(2, 4, 1);
-  g.addAresta(3, 4, 1);
+  int v1, v2, custo, nvertices;
+  string line;
+  ifstream infile("disciplinas.txt");
+  infile >> nvertices;
+
+  infile.clear();
+  infile.seekg(0, infile.beg);
+  Grafo g(nvertices);
+  while (infile >> v1 >> v2) {
+      g.addAresta(v1, v2, custo);
+  }
   g.dijkstra(0, 4);
-  cout << endl;
-  // int v1, v2, custo, nlinha=0;
-  // ifstream infile("disciplinas.txt");
-  // while (infile)
-  //   nlinha++;
-  //   infile.clear();
-  //   infile.seekg(0, infile.beg);
-  //   Grafo g(nlinha);
-  //   while (infile >> v1 >> v2 >> custo) {
-  //       g.addAresta(v1, v2, custo);
-  //   }
-  //   g.dijkstra(0, 4);
 
   return 0;
 }
