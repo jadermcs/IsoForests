@@ -1,6 +1,7 @@
 // Implementação do algoritmo de Dijkstra
 // Fonte para apoio: https://gist.github.com/marcoscastro/d4e0df5b134c2cd63cf2
 #include "grafo.hpp"
+#include <fstream>
 
 
 // construtor
@@ -69,15 +70,18 @@ int Grafo::dijkstra(int orig, int dest) {
 }
 
 int main(int argc, char *argv[]) {
-	Grafo g(5);
-	g.addAresta(0, 1, 4); // addAresta(v1, v2, custo)
-	g.addAresta(0, 2, 2);
-	g.addAresta(0, 3, 5);
-	g.addAresta(1, 4, 1);
-	g.addAresta(2, 1, 1);
-	g.addAresta(2, 3, 2);
-	g.addAresta(2, 4, 1);
-	g.addAresta(3, 4, 1);
+    int v1, v2, custo, nlinha=0;
+    ifstream infile("disciplinas.txt");
+    while (infile)
+        nlinha++;
+
+    infile.clear();
+    infile.seekg(0, infile.beg);
+
+	Grafo g(nlinha);
+    while (infile >> v1 >> v2 >> custo) {
+        g.addAresta(v1, v2, custo);
+    }
 
 	cout << g.dijkstra(0, 4) << endl;
 

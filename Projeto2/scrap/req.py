@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from requests import get
 from pprint import pprint
+from random import randint
 
 mainurl = "https://www.matriculaweb.unb.br/"
 
@@ -31,8 +32,8 @@ def main():
 
     with open('disciplinas.txt', 'w') as fout:
         for dsc in disciplinas:
-            fout.write(dsc + '-' + ','.join(disciplinas[dsc]['requisitos']) +
-                       '\n')
+            for req in disciplinas[dsc]['requisitos']:
+                fout.write(dsc + ' ' + req + ' ' + randint(1,3) + '\n')
 
     pprint(disciplinas)
 
