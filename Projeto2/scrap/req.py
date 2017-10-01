@@ -10,6 +10,7 @@ def main():
     bsobj = BeautifulSoup(html, "lxml")
 
     disciplinas = {}
+    enum = {}
 
     for table in bsobj.find('div', {'class':'body table-responsive'})\
               .find_all('div', {'class':'table-responsive'}):
@@ -29,13 +30,15 @@ def main():
                 'nome': a.text.strip(),
                 'requisitos': [x for x in reqlist if x != ' ']
             }
+    for i, k in enumerate(disciplinas.keys()):
+        enum[k] = str(i)
 
     with open('disciplinas.txt', 'w') as fout:
         fout.write(str(len(disciplinas.keys())) + '\n')
         for dsc in disciplinas:
             for req in disciplinas[dsc]['requisitos']:
-                fout.write(dsc + ' ' + req + ' ' +
-                           str(randint(1,3)) + '\n')
+                fout.write(enum[dsc] + ' ' + enum[req] +
+                           ' ' + str(randint(1,3)) + '\n')
 
     pprint(disciplinas)
 
