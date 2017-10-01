@@ -18,9 +18,12 @@ void Grafo::addAresta(int v1, int v2, int custo) {
 }
 
 // algoritmo de Dijkstra
-int Grafo::dijkstra(int orig, int dest) {
+void Grafo::dijkstra(int orig, int dest) {
   // vetor de distâncias
   int dist[V];
+  
+  int parent[V];
+  parent[0] = -1;
 /*  vetor de visitados serve para caso o vértice já tenha sido
  expandido (visitado), não expandir mais 
 */
@@ -61,29 +64,56 @@ int Grafo::dijkstra(int orig, int dest) {
 	  // atualiza a distância de "v" e insere na fila
 	  dist[v] = dist[u] + custo_aresta;
 	  pq.push(make_pair(dist[v], v));
+	  parent[v] = u;
 	}
       }
     }
   }
-  // retorna a distância mínima até o destino
-  return dist[dest];
+  printSolution(dist, dest, parent);
 }
 
-int main(int argc, char *argv[]) {
-    int v1, v2, custo, nlinha=0;
-    ifstream infile("disciplinas.txt");
-    while (infile)
-        nlinha++;
+void Grafo::printPath(int parent[], int j) {
+  // Base Case : If j is source
+    if (parent[j]==-1)
+        return;
+ 
+    printPath(parent, parent[j]);
+ 
+    printf("%d ", j);
+}
 
-    infile.clear();
-    infile.seekg(0, infile.beg);
-
-	Grafo g(nlinha);
-    while (infile >> v1 >> v2 >> custo) {
-        g.addAresta(v1, v2, custo);
+void Grafo::printSolution(int dist[], int n, int parent[]) {
+    int src = 0;
+    printf("Vertex\t  Distance\t\tPath");
+    for (int i = 1; i < V; i++) {
+        printf("\n%d -> %d \t\t %d\t\t%d ", src, i, dist[i], src);
+        printPath(parent, i);
     }
+}
 
-	cout << g.dijkstra(0, 4) << endl;
+int main() {
+  Grafo g(5);
+  g.addAresta(0, 1, 4); // addAresta(v1, v2, custo)
+  g.addAresta(0, 2, 2);
+  g.addAresta(0, 3, 5);
+  g.addAresta(1, 4, 1);
+  g.addAresta(2, 1, 1);
+  g.addAresta(2, 3, 2);
+  g.addAresta(2, 4, 1);
+  g.addAresta(3, 4, 1);
+  g.dijkstra(0, 4);
+  cout << endl;
+  // int v1, v2, custo, nlinha=0;
+  // ifstream infile("disciplinas.txt");
+  // while (infile)
+  //   nlinha++;
+  //   infile.clear();
+  //   infile.seekg(0, infile.beg);
+  //   Grafo g(nlinha);
+  //   while (infile >> v1 >> v2 >> custo) {
+  //       g.addAresta(v1, v2, custo);
+  //   }
+  //   g.dijkstra(0, 4);
 
-	return 0;
+  return 0;
 }

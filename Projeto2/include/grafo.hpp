@@ -16,7 +16,9 @@ class Grafo {
 public:
   Grafo(int V);
   void addAresta(int v1, int v2, int custo);
-  int dijkstra(int orig, int dest);
+  void dijkstra(int orig, int dest);
+  void printPath(int parent[], int j);
+  void printSolution(int dist[], int n, int parent[]);
 };
 
 #endif
