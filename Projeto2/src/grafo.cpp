@@ -41,6 +41,7 @@ void Grafo::topSortAndCpm() {
   int* end   = &Stack.top() + 1;
   vector<int> topSorted(end - Stack.size(), end);
   // Print contents of stack
+  cout << "Topological Sort\n"; 
   while (Stack.empty() == false) {
     cout << Stack.top() << " ";
     Stack.pop();
@@ -55,7 +56,7 @@ void Grafo::topSortAndCpm() {
       }
     }
   }
-  cout << endl << endl;
+  cout << endl << endl << "Critical Path\n";
   int maxst = 0;
   for (int i = 0; i < V; ++i) {
     if (Cmp[i].size() > maxst) {
