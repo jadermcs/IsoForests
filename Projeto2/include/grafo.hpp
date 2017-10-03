@@ -19,7 +19,7 @@ public:
   Grafo(int V);
   void addAresta(int v1, int v2, int custo);
   void topSortUtil(int v, bool visited[], stack<int> &Stack);
-  void topSort();
+  void topSortAndCpm();
   void dijkstra(int orig, int dest);
 };
 

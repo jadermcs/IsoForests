@@ -25,26 +25,47 @@ void Grafo::topSortUtil(int v, bool visited[], stack<int> &Stack) {
     Stack.push(v);
 }
 
-void Grafo::topSort() {
-    stack<int> Stack;
+void Grafo::topSortAndCpm() {
+  stack<int> Stack, Cmp[V];
+  int lengthTo[V] = {0};
+  // Mark all the vertices as not visited
+  bool *visited = new bool[V];
+  for (int i = 0; i < V; i++)
+    visited[i] = false;
 
-    // Mark all the vertices as not visited
-    bool *visited = new bool[V];
-    for (int i = 0; i < V; i++)
-        visited[i] = false;
-
-    // Call the recursive helper function to store Topological
-    // Sort starting from all vertices one by one
-    for (int i = 0; i < V; i++)
-      if (visited[i] == false)
-        topSortUtil(i, visited, Stack);
-
-    // Print contents of stack
-    while (Stack.empty() == false)
-    {
-        cout << Stack.top() << " ";
-        Stack.pop();
+  // Call the recursive helper function to store Topological
+  // Sort starting from all vertices one by one
+  for (int i = 0; i < V; i++)
+    if (visited[i] == false)
+      topSortUtil(i, visited, Stack);
+  int* end   = &Stack.top() + 1;
+  vector<int> topSorted(end - Stack.size(), end);
+  // Print contents of stack
+  while (Stack.empty() == false) {
+    cout << Stack.top() << " ";
+    Stack.pop();
+  }
+  list< pair<int,int> >::iterator i;
+  vector<int>::iterator el;
+  for (el = topSorted.begin(); el != topSorted.end(); ++el) {
+    for (i = adj[*el].begin(); i != adj[*el].end(); ++i) {
+      if (lengthTo[(*i).first] <= lengthTo[*el] + (*i).second) {
+	lengthTo[(*i).first] = lengthTo[*el] + (*i).second;
+	Cmp[(*i).first].push(*el);
+      }
     }
+  }
+  cout << endl << endl;
+  int maxst = 0;
+  for (int i = 0; i < V; ++i) {
+    if (Cmp[i].size() > maxst) {
+      maxst = i;
+    }
+  }
+  while (Cmp[maxst].empty() == false) {
+    cout << Cmp[maxst].top() << " "; 
+    Cmp[maxst].pop();
+  }
 }
 
 
@@ -59,7 +80,7 @@ int main() {
 
   cout << "Following is a Topological Sort of "
            "the given graph n" << endl;
-  g.topSort();
+  g.topSortAndCpm();
   cout << endl;
   return 0;
 }
