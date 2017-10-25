@@ -8,11 +8,11 @@ School::School(int id, int min_skill){
 }
 
 bool School::is_free(){
-  return (linked_to.size() < capacity);
+  return ((int) linked_to.size() < capacity);
 }
 
 void School::accepts(Professor *p){
-  if (linked_to.size() > capacity){
+  if ((int) linked_to.size() > capacity){
     throw runtime_error("School::accepts " + stoi(id) + " full capacity reached");
   }
   linked_to.push_back(p);

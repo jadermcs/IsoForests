@@ -107,9 +107,9 @@ int main(){
   PoolManager<School> sm(NUM_SCHOOLS);
 
   int id, skill, preference[MAX_PREFS];
-  int read_c;
+  //int read_c;
 
-  Professor *the_professor, *cur;
+  Professor *the_professor;
   School *the_school;
 
   fp.open(FILE_NAME);
@@ -123,22 +123,26 @@ int main(){
 
   for (int i = 0; i < NUM_PROFESSORS; i++) {
     getline (fp, line);
-    read_c = sscanf (line.c_str(), "(P%d, %d): (E%d, E%d, E%d, E%d, E%d)",
-		     &id, &skill, &preference[0], &preference[1], &preference[2], &preference[3], &preference[4]);
+    //read_c = /
+    sscanf (line.c_str(), "(P%d, %d): (E%d, E%d, E%d, E%d, E%d)",
+		     &id, &skill, &preference[0], &preference[1], &preference[2],
+             &preference[3], &preference[4]);
     // if (read_c != 7){
     //   i--;
     //   continue;
     // }
     the_professor = new Professor(id-1, skill);
     the_professor->set_prefs(preference);
-    read_c = pm.add_element(the_professor);
+    //read_c = /
+    pm.add_element(the_professor);
   }
 
   fp.seekg (SCH_START, ios_base::beg);
 
   for (int i = 0; i < NUM_SCHOOLS; i++) {
     getline (fp, line);
-    read_c = sscanf (line.c_str(), "(E%d):(%d)", &id, &skill);
+    //read_c = /
+    sscanf (line.c_str(), "(E%d):(%d)", &id, &skill);
     the_school = new School(id-1, skill);
     sm.add_element(the_school);
   }
