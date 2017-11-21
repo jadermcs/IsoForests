@@ -13,7 +13,7 @@
 #define NUM_SCHOOLS 50
 #define MAX_PREFS 5
 #define MAX_SKILLS 3
-#define FILE_NAME "input2.txt"
+#define FILE_NAME "input.txt"
 #define PRF_START 130
 #define SCH_START 3719
 #define MAX_PROFS 3
