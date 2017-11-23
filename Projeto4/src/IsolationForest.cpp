@@ -22,8 +22,7 @@
 
 #include "IsolationForest.h"
 
-namespace IsolationForest
-{
+namespace IsolationForest {
 	Node::Node() :
 		m_splitValue(0),
 		m_left(NULL),

@@ -29,7 +29,6 @@
 #include <string>
 #include <time.h>
 #include <vector>
-
 namespace IsolationForest
 {
 	/// Each feature has a name and value.
