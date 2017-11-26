@@ -241,7 +241,7 @@ int readFile(){
        return -1;
     }
 
-    while (fscanf(pF, "%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%[^|]|%f\n", d_name, d_state, d_party, r_desc, c_name, c_id, r_date, &r_value) != EOF){
+    while (fscanf(pF, "%[^|],%[^|],%[^|],%[^|],%[^|],%[^|],%[^|],%f\n", d_name, d_state, d_party, r_desc, c_name, c_id, r_date, &r_value) != EOF){
         if(r_value < 0){
             r_value = r_value * -1;
         }
