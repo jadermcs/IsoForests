@@ -1,211 +1,6 @@
-/** @file dirty.cpp
- *  @brief Main file.
- *
- *  This file contains all the functions and variables
- *  to fully execute the fourth project of TAG 2017/1.
- *
- *  @author Dayanne Fernandes da Cunha 13/0107191
- *  @author Renato Avellar Nobre 15/0146698
- *  @bug No bug known.
- */
-
 #include "isof.h"
 
 
-/**
- * Clears the terminal screen
- *
- * @return void
- */
-void clear(){
-  cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-}
-
-/**
- * Information message to guide the user to press any key to continue using the
- *  system
- *
- * @return void
- */
-void pressToContinue(){
-    cout << endl << "\t    Aperte <QUALQUER TECLA> para voltar ao menu.    ";
-    getchar();
-    getchar();
-}
-
-/**
- * Displays the help screen
- *
- * @return void
- */
-void displayHelpUI(){
-    cout << "\t-----Brazil's House of Deputies Reimbursements Anomalies-----" << endl;
-    cout << "\t- Quarto projeto da matéria de Teoria e Aplicação de Grafos -" << endl;
-    cout << "\t- (TAG) do semestre de 2017/1. Feito por Dayanne Fernandes  -" << endl;
-    cout << "\t- e Renato Nobre. Matrículas 13/0107191 e 15/0146698        -" << endl;
-    cout << "\t- respectivamente.                                          -" << endl;
-    cout << "\t-                                                           -" << endl;
-    cout << "\t- O trabalho implementa um grafo contendo informacoes de    -" << endl;
-    cout << "\t- gastos de parlamentares, e tem como objetivo encontrar    -" << endl;
-    cout << "\t- anomalias em tais gastos. A opção 1 mosta as anomalias    -" << endl;
-    cout << "\t- encontradas pelo nosso algoritmo; a opção 2 realiza uma   -" << endl;
-    cout << "\t- busca pelos parlamentares, utilizando seu identificador   -" << endl;
-    cout << "\t- ou busca todos os parlamentares de um certo estado ou     -" << endl;
-    cout << "\t- partido, e realizando a soma dos gastos. Opção 3 mostra   -" << endl;
-    cout << "\t- todos os parlamentares, com seus respectivos indicadores  -" << endl;
-    cout << "\t- e informações de partido e estado. Opção 4 mostra todas   -" << endl;
-    cout << "\t- as empresas envolvidas com os gastos. Opção 5 mostra o    -" << endl;
-    cout << "\t- grafo completo.                                           -" << endl;
-    cout << "\t-------------------------------------------------------------" << endl;
-
-    pressToContinue();
-}
-
-
-/**
- * Displays the search user interface of the project
- *
- * @return void
- */
-void searchUI(){
-    clear();
-
-    cout << "\t-----Brazil's House of Deputies Reimbursements Anomalies-----" << endl;
-    cout << "\t-                                                           -" << endl;
-    cout << "\t-----------------------Search Menu---------------------------" << endl;
-    cout << "\t-                                                           -" << endl;
-    cout << "\t- 1. Listar deputado por identificador                      -" << endl;
-    cout << "\t- 2. Listar deputados por sigla do estado                   -" << endl;
-    cout << "\t- 3. Listar deputados por sigla do partido                  -" << endl;
-    cout << "\t- 4. Sair                                                   -" << endl;
-    cout << "\t-                                                           -" << endl;
-    cout << "\t-------------------------------------------------------------" << endl;
-    cout << endl << "\t>>> ";
-}
-
-
-/**
- * Displays the loading user interface of the project
- *
- * @return void
- */
-void loadingUI(){
-    clear();
-
-    cout << "\t-----Brazil's House of Deputies Reimbursements Anomalies-----" << endl;
-    cout << "\t-                                                           -" << endl;
-    cout << "\t-                                                           -" << endl;
-    cout << "\t-                                                           -" << endl;
-    cout << "\t-                                                           -" << endl;
-    cout << "\t-                      Carregando ...                       -" << endl;
-    cout << "\t-                                                           -" << endl;
-    cout << "\t-                                                           -" << endl;
-    cout << "\t-                                                           -" << endl;
-    cout << "\t-            Pode demorar em média 1 minuto                 -" << endl;
-    cout << "\t-------------------------------------------------------------" << endl;
-}
-
-
-/**
- * Displays the main user interface of the project
- *
- * @return void
- */
-void displayUI(){
-    clear();
-
-    cout << "\t-----Brazil's House of Deputies Reimbursements Anomalies-----" << endl;
-    cout << "\t-                                                           -" << endl;
-    cout << "\t- 1. Realizar busca por anomalias                           -" << endl;
-    cout << "\t- 2. Busca Personalizada                                    -" << endl;
-    cout << "\t- 3. Mostrar lista de deputados                             -" << endl;
-    cout << "\t- 4. Mostrar lista de empresas                              -" << endl;
-    cout << "\t- 5. Mostrar o Grafo                                        -" << endl;
-    cout << "\t- 6. Ajuda                                                  -" << endl;
-    cout << "\t- 7. Sair                                                   -" << endl;
-    cout << "\t-                                                           -" << endl;
-    cout << "\t-------------------------------------------------------------" << endl;
-    cout << endl << "\t>>> ";
-}
-
-/**
- * Displays the deputy search user interface of the project
- *
- * @return void
- */
-void deputySearchUI(){
-    clear();
-
-    cout << "\t-----Brazil's House of Deputies Reimbursements Anomalies-----" << endl;
-    cout << "\t-                                                           -" << endl;
-    cout << "\t- 1. Informe o identificador do deputado                    -" << endl;
-    cout << "\t-                                                           -" << endl;
-    cout << "\t-------------------------------------------------------------" << endl;
-    cout << endl << "\t>>> ";
-}
-
-/**
- * Displays the state search user interface of the project
- *
- * @return void
- */
-void stateSearchUI(){
-    clear();
-
-    cout << "\t-----Brazil's House of Deputies Reimbursements Anomalies-----" << endl;
-    cout << "\t-                                                           -" << endl;
-    cout << "\t- 1. Informe o estado do deputado                           -" << endl;
-    cout << "\t-                                                           -" << endl;
-    cout << "\t-------------------------------------------------------------" << endl;
-    cout << endl << "\t>>> ";
-}
-
-/**
- * Displays the party search user interface of the project
- *
- * @return void
- */
-void partySearchUI(){
-    clear();
-
-    cout << "\t-----Brazil's House of Deputies Reimbursements Anomalies-----" << endl;
-    cout << "\t-                                                           -" << endl;
-    cout << "\t- 1. Informe o partido do deputado                          -" << endl;
-    cout << "\t-                                                           -" << endl;
-    cout << "\t-------------------------------------------------------------" << endl;
-    cout << endl << "\t>>> ";
-}
-
-/**
- * Displays a message when the user inputs a not valid choice for the
- *  processUIChoice
- *
- * @return void
- */
-void displayWrongChoiceUI(){
-    displayUI();
-    cout << "\tEscolha invalida, informe um valor de 1 a 7" << endl;
-    cout << "\t>>> ";
-}
-
-
-/**
- * Displays a message when the user inputs a not valid choice for the
- *  processUIChoice
- *
- * @return void
- */
-void displayWrongSearchChoiceUI(){
-    searchUI();
-    cout << "\tEscolha invalida, informe um valor de 1 a 4" << endl;
-    cout << "\t>>> ";
-}
-
-/**
- * Print all party expanses given a party input
- *
- * @return void
- */
 void findParty(){
     string party;
     float totalValue = 0;
@@ -230,7 +25,7 @@ void findParty(){
 
     cout << endl << endl << ">>>> GASTOS TOTAIS: R$" << fixed << setprecision(2) << totalValue << endl;
 
-    pressToContinue();
+    
 }
 
 /**
@@ -260,8 +55,6 @@ void findState(){
     }
 
     cout << endl << endl << ">>>> GASTOS TOTAIS: R$" << fixed << setprecision(2) << totalValue << endl;
-
-    pressToContinue();
 }
 
 /**
@@ -287,8 +80,6 @@ void findDeputy(){
     }
 
     cout << endl << endl << ">>>> GASTOS TOTAIS: R$" << fixed << setprecision(2) <<totalValue << endl;
-
-    pressToContinue();
 }
 
 /**
@@ -297,33 +88,6 @@ void findDeputy(){
  *
  * @return void
  */
-void processSearchChoice(){
-    int choice = 0;
-
-    cin >> choice;
-
-    while(choice != 4){
-        clear();
-
-        if(choice == 1){
-            deputySearchUI();
-            findDeputy();
-            searchUI();
-        } else if(choice == 2){
-            stateSearchUI();
-            findState();
-            searchUI();
-        } else if(choice == 3){
-            partySearchUI();
-            findParty();
-            searchUI();
-        }  else {
-            displayWrongSearchChoiceUI();
-        }
-
-        cin >> choice;
-    }
-}
 
 /**
  * Process what is the user's choice of the main user interface
@@ -331,48 +95,11 @@ void processSearchChoice(){
  *
  * @return void
  */
-void processUIChoice(){
-    int choice = 0;
-
-    cin >> choice;
-
-    while(choice != 7){
-        clear();
-
-        if(choice == 1){
-            printAnomalies();
-            displayUI();
-        } else if(choice == 2){
-            searchUI();
-            processSearchChoice();
-            displayUI();
-        } else if(choice == 3){
-            printdVertex();
-            displayUI();
-        } else if(choice == 4){
-            printcVertex();
-            displayUI();
-        } else if(choice == 5){
-            printGrafo();
-            displayUI();
-        } else if(choice == 6){
-            displayHelpUI();
-            displayUI();
-        } else {
-            displayWrongChoiceUI();
-        }
-
-        cin >> choice;
-    }
-}
-
 
 void printAnomalies(){
     createCommunities();
 
     calcAnomalies();
-
-    pressToContinue();
 }
 
 void calcAnomalies(){
@@ -423,14 +150,6 @@ void createCommunities(){
   }
 }
 
-/**
- *  Print the Graph in the following format
- *  1 - DEPUTY_NAME / DEPUTY_STATE / DEPUTY_PARTY
- *      - TYPE_OF_EXPANSE AT THE COMPANY COMPANY_NAME / COMPANY_ID:
- *            - EXPANSE_DATE R$EXPANSE_VALUE
- *
- * @return void
- */
 void printGrafo(){
     /*print deputy vertex*/
     for(int i = 0; i < GRAPH.first.size();i++){
@@ -444,46 +163,25 @@ void printGrafo(){
             }
         }
     }
-
-    pressToContinue();
 }
 
-/**
- *  Print Deputies vertexes as a list of name / state / party
- *
- * @return void
- */
 void printdVertex(){
     for(int i = 0; i < GRAPH.first.size();i++){
         cout << i+1 << " - " << GRAPH.first[i].name << " " << GRAPH.first[i].state << " " << GRAPH.first[i].party << endl;
     }
 
-    pressToContinue();
 }
 
-/**
- *  Print company vertexes as a list of name and id
- *
- * @return void
- */
+
 void printcVertex(){
     for(int i = 0; i < GRAPH.second.size();i++){
         cout << i+1 << " - " << GRAPH.second[i].name << " " << GRAPH.second[i].id << endl;
     }
 
-    pressToContinue();
+    
 }
 
-/**
- * Look for the existence of a edge.
- *
- *  @param r_desc the name of the edge being looked
- *  @param nome the name of the company vertex
- *  @param d_index the index of the deputy
- *
- * @return int i represents the index of the edge being looked
- * or -1 representing that there is no such edge
- */
+
 int edgeExistence(string r_desc, string nome, int d_index){
 
     for(int i = 0; i < GRAPH.first[d_index].gastos.size();i++){
@@ -654,10 +352,9 @@ int readFile(){
  */
 int main(){
 
-    loadingUI();
-    readFile();
-    displayUI();
-    processUIChoice();
-
+  loadingUI();
+  readFile();
+  printAnomalies();
+      
   return 0;
 }
