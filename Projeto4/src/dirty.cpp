@@ -8,15 +8,15 @@ void findParty(){
   cin >> party;
   transform(party.begin(), party.end(),party.begin(), ::toupper);
 
-  for(int i = 0; i < GRAPH.first.size();i++){
+  for(int i = 0; i < (long long) GRAPH.first.size();i++){
     if(party.compare(GRAPH.first[i].party) == 0){
       cout << i+1 << " - " << GRAPH.first[i].name << " / " << GRAPH.first[i].state << " / " \
           << GRAPH.first[i].party << endl;
-      for(int j = 0; j < GRAPH.first[i].gastos.size();j++){
+      for(int j = 0; j < (long long) GRAPH.first[i].gastos.size();j++){
 	cout << "\t-" << GRAPH.first[i].gastos[j].tipoT << " na empresa " \
         << GRAPH.first[i].gastos[j].empresa.name << " / " << GRAPH.first[i].gastos[j].empresa.id \
         << ": " << endl;
-	for(int k = 0; k < GRAPH.first[i].gastos[j].transac.size();k++){
+	for(int k = 0; k < (long long) GRAPH.first[i].gastos[j].transac.size();k++){
 	  cout << "\t\t- " << GRAPH.first[i].gastos[j].transac[k].first << "  R$" \
           << GRAPH.first[i].gastos[j].transac[k].second << endl;
 	  totalValue += GRAPH.first[i].gastos[j].transac[k].second;
@@ -48,15 +48,15 @@ void calcAnomalies(){
 
   cout << "No total foram gastos R$ " << total << " reais" << endl;
 
-  for(int i = 0; i < GRAPH.first.size();i++)
+  for(int i = 0; i < (long long) GRAPH.first.size();i++)
     {
       N = GRAPH.first[i].gastos.size();
       sum = COM[GRAPH.first[i].name];
       md = sum/N;
       var = big = 0.0;
       low = 9999999999;
-      for(int j = 0; j < GRAPH.first[i].gastos.size();j++){
-	for (int k = 0; k < GRAPH.first[i].gastos[j].transac.size(); ++k)
+      for(int j = 0; j < (long long) GRAPH.first[i].gastos.size();j++){
+	for (int k = 0; k < (long long) GRAPH.first[i].gastos[j].transac.size(); ++k)
 	  {
 	    cost = GRAPH.first[i].gastos[j].transac[k].second;
 
@@ -76,10 +76,10 @@ void calcAnomalies(){
 
 void createCommunities(){
   float sum;
-  for(int i = 0; i < GRAPH.first.size();i++){
+  for(int i = 0; i < (long long) GRAPH.first.size();i++){
     sum = 0;
-    for(int j = 0; j < GRAPH.first[i].gastos.size();j++){
-      for(int k = 0; k < GRAPH.first[i].gastos[j].transac.size();k++){
+    for(int j = 0; j < (long long) GRAPH.first[i].gastos.size();j++){
+      for(int k = 0; k < (long long) GRAPH.first[i].gastos[j].transac.size();k++){
         sum += GRAPH.first[i].gastos[j].transac[k].second;
       }
     }
@@ -90,13 +90,13 @@ void createCommunities(){
 }
 
 void printGrafo(){
-  for(int i = 0; i < GRAPH.first.size();i++){
+  for(int i = 0; i < (long long) GRAPH.first.size();i++){
     cout << i+1 << " - " << GRAPH.first[i].name << " / " << GRAPH.first[i].state \
         << " / " << GRAPH.first[i].party << endl;
-    for(int j = 0; j < GRAPH.first[i].gastos.size();j++){
+    for(int j = 0; j < (long long) GRAPH.first[i].gastos.size();j++){
       cout << "\t-" << GRAPH.first[i].gastos[j].tipoT << " na empresa " \
           << GRAPH.first[i].gastos[j].empresa.name << " / " << GRAPH.first[i].gastos[j].empresa.id << ": " << endl;
-      for(int k = 0; k < GRAPH.first[i].gastos[j].transac.size();k++){
+      for(int k = 0; k < (long long) GRAPH.first[i].gastos[j].transac.size();k++){
 	cout << "\t\t- " << GRAPH.first[i].gastos[j].transac[k].first << "  R$" \
         << GRAPH.first[i].gastos[j].transac[k].second << endl;
       }
@@ -107,21 +107,21 @@ void printGrafo(){
 }
 
 void printdVertex(){
-  for(int i = 0; i < GRAPH.first.size();i++){
+  for(int i = 0; i < (long long) GRAPH.first.size();i++){
     cout << i+1 << " - " << GRAPH.first[i].name << " " << GRAPH.first[i].state << " " << GRAPH.first[i].party << endl;
   }
 
 }
 
 void printcVertex(){
-  for(int i = 0; i < GRAPH.second.size();i++){
+  for(int i = 0; i < (long long) GRAPH.second.size();i++){
     cout << i+1 << " - " << GRAPH.second[i].name << " " << GRAPH.second[i].id << endl;
   }
 }
 
 int edgeExistence(string r_desc, string nome, int d_index){
 
-  for(int i = 0; i < GRAPH.first[d_index].gastos.size();i++){
+  for(int i = 0; i < (long long) GRAPH.first[d_index].gastos.size();i++){
     if(GRAPH.first[d_index].gastos[i].tipoT == r_desc && GRAPH.first[d_index].gastos[i].empresa.name == nome){
       return i;
     }
@@ -132,13 +132,13 @@ int edgeExistence(string r_desc, string nome, int d_index){
 
 int nameExistence(int deputyOrCompany, string name){
   if(deputyOrCompany == 0){
-    for(int i = 0; i < GRAPH.first.size();i++){
+    for(int i = 0; i < (long long) GRAPH.first.size();i++){
       if(GRAPH.first[i].name.compare(name) == 0){
 	return i;
       }
     }
   } else {
-    for(int i = 0; i < GRAPH.second.size();i++){
+    for(int i = 0; i < (long long) GRAPH.second.size();i++){
       if(GRAPH.second[i].name.compare(name) == 0){
 	return i;
       }
