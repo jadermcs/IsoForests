@@ -1,43 +1,16 @@
-/** @file dirty.cpp
- *  @brief Main file.
- *
- *  This file contains all the functions and variables
- *  to fully execute the fourth project of TAG 2017/1.
- *
- *  @author Dayanne Fernandes da Cunha 13/0107191
- *  @author Renato Avellar Nobre 15/0146698
- *  @bug No bug known.
- */
-
-#include "dirty.inl"
+#include "dirty.h"
 
 
-/**
- * Clears the terminal screen
- *
- * @return void
- */
 void clear(){
   cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 }
 
-/**
- * Information message to guide the user to press any key to continue using the
- *  system
- *
- * @return void
- */
 void pressToContinue(){
     cout << endl << "\t    Aperte <QUALQUER TECLA> para voltar ao menu.    ";
     getchar();
     getchar();
 }
 
-/**
- * Displays the help screen
- *
- * @return void
- */
 void displayHelpUI(){
     cout << "\t-----Brazil's House of Deputies Reimbursements Anomalies-----" << endl;
     cout << "\t- Quarto projeto da matéria de Teoria e Aplicação de Grafos -" << endl;
@@ -62,11 +35,6 @@ void displayHelpUI(){
 }
 
 
-/**
- * Displays the search user interface of the project
- *
- * @return void
- */
 void searchUI(){
     clear();
 
@@ -84,11 +52,6 @@ void searchUI(){
 }
 
 
-/**
- * Displays the loading user interface of the project
- *
- * @return void
- */
 void loadingUI(){
     clear();
 
@@ -106,11 +69,6 @@ void loadingUI(){
 }
 
 
-/**
- * Displays the main user interface of the project
- *
- * @return void
- */
 void displayUI(){
     clear();
 
@@ -128,11 +86,6 @@ void displayUI(){
     cout << endl << "\t>>> ";
 }
 
-/**
- * Displays the deputy search user interface of the project
- *
- * @return void
- */
 void deputySearchUI(){
     clear();
 
@@ -144,11 +97,6 @@ void deputySearchUI(){
     cout << endl << "\t>>> ";
 }
 
-/**
- * Displays the state search user interface of the project
- *
- * @return void
- */
 void stateSearchUI(){
     clear();
 
@@ -160,11 +108,6 @@ void stateSearchUI(){
     cout << endl << "\t>>> ";
 }
 
-/**
- * Displays the party search user interface of the project
- *
- * @return void
- */
 void partySearchUI(){
     clear();
 
@@ -176,12 +119,6 @@ void partySearchUI(){
     cout << endl << "\t>>> ";
 }
 
-/**
- * Displays a message when the user inputs a not valid choice for the
- *  processUIChoice
- *
- * @return void
- */
 void displayWrongChoiceUI(){
     displayUI();
     cout << "\tEscolha invalida, informe um valor de 1 a 7" << endl;
@@ -189,23 +126,12 @@ void displayWrongChoiceUI(){
 }
 
 
-/**
- * Displays a message when the user inputs a not valid choice for the
- *  processUIChoice
- *
- * @return void
- */
 void displayWrongSearchChoiceUI(){
     searchUI();
     cout << "\tEscolha invalida, informe um valor de 1 a 4" << endl;
     cout << "\t>>> ";
 }
 
-/**
- * Print all party expanses given a party input
- *
- * @return void
- */
 void findParty(){
     string party;
     float totalValue = 0;
@@ -215,10 +141,8 @@ void findParty(){
     for(int i = 0; i < GRAPH.first.size();i++){
         if(party.compare(GRAPH.first[i].party) == 0){
             cout << i+1 << " - " << GRAPH.first[i].name << " / " << GRAPH.first[i].state << " / " << GRAPH.first[i].party << endl;
-            /*print company vertex and edge name*/
             for(int j = 0; j < GRAPH.first[i].gastos.size();j++){
                 cout << "\t-" << GRAPH.first[i].gastos[j].tipoT << " na empresa " << GRAPH.first[i].gastos[j].empresa.name << " / " << GRAPH.first[i].gastos[j].empresa.id << ": " << endl;
-                /*print edge values*/
                 for(int k = 0; k < GRAPH.first[i].gastos[j].transac.size();k++){
                     cout << "\t\t- " << GRAPH.first[i].gastos[j].transac[k].first << "  R$" << GRAPH.first[i].gastos[j].transac[k].second << endl;
                     totalValue += GRAPH.first[i].gastos[j].transac[k].second;
@@ -233,11 +157,6 @@ void findParty(){
     pressToContinue();
 }
 
-/**
- * Print all state expanses given a input
- *
- * @return void
- */
 void findState(){
     string state;
     float totalValue = 0;
@@ -247,10 +166,8 @@ void findState(){
     for(int i = 0; i < GRAPH.first.size();i++){
         if(state.compare(GRAPH.first[i].state) == 0){
             cout << i+1 << " - " << GRAPH.first[i].name << " / " << GRAPH.first[i].state << " / " << GRAPH.first[i].party << endl;
-            /*print company vertex and edge name*/
             for(int j = 0; j < GRAPH.first[i].gastos.size();j++){
                 cout << "\t-" << GRAPH.first[i].gastos[j].tipoT << " na empresa " << GRAPH.first[i].gastos[j].empresa.name << " / " << GRAPH.first[i].gastos[j].empresa.id << ": " << endl;
-                /*print edge values*/
                 for(int k = 0; k < GRAPH.first[i].gastos[j].transac.size();k++){
                     cout << "\t\t- " << GRAPH.first[i].gastos[j].transac[k].first << "  R$" << GRAPH.first[i].gastos[j].transac[k].second << endl;
                     totalValue += GRAPH.first[i].gastos[j].transac[k].second;
@@ -264,11 +181,6 @@ void findState(){
     pressToContinue();
 }
 
-/**
- * Print all expanses from a deputy
- *
- * @return void
- */
 void findDeputy(){
     int id;
     float totalValue = 0;
@@ -279,7 +191,6 @@ void findDeputy(){
 
     for(int j = 0; j < GRAPH.first[id-1].gastos.size();j++){
         cout << "\t-" << GRAPH.first[id-1].gastos[j].tipoT << " na empresa " << GRAPH.first[id-1].gastos[j].empresa.name << " / " << GRAPH.first[id-1].gastos[j].empresa.id << ": " << endl;
-        /*print edge values*/
         for(int k = 0; k < GRAPH.first[id-1].gastos[j].transac.size();k++){
             cout << "\t\t- " << GRAPH.first[id-1].gastos[j].transac[k].first << "  R$" << GRAPH.first[id-1].gastos[j].transac[k].second << endl;
             totalValue += GRAPH.first[id-1].gastos[j].transac[k].second;
@@ -291,12 +202,6 @@ void findDeputy(){
     pressToContinue();
 }
 
-/**
- * Process what is the user's choice of the search interface
- *  and call the respective method
- *
- * @return void
- */
 void processSearchChoice(){
     int choice = 0;
 
@@ -325,12 +230,6 @@ void processSearchChoice(){
     }
 }
 
-/**
- * Process what is the user's choice of the main user interface
- *  and call the respective method
- *
- * @return void
- */
 void processUIChoice(){
     int choice = 0;
 
@@ -423,22 +322,11 @@ void createCommunities(){
   }
 }
 
-/**
- *  Print the Graph in the following format
- *  1 - DEPUTY_NAME / DEPUTY_STATE / DEPUTY_PARTY
- *      - TYPE_OF_EXPANSE AT THE COMPANY COMPANY_NAME / COMPANY_ID:
- *            - EXPANSE_DATE R$EXPANSE_VALUE
- *
- * @return void
- */
 void printGrafo(){
-    /*print deputy vertex*/
     for(int i = 0; i < GRAPH.first.size();i++){
         cout << i+1 << " - " << GRAPH.first[i].name << " / " << GRAPH.first[i].state << " / " << GRAPH.first[i].party << endl;
-        /*print company vertex and edge name*/
         for(int j = 0; j < GRAPH.first[i].gastos.size();j++){
             cout << "\t-" << GRAPH.first[i].gastos[j].tipoT << " na empresa " << GRAPH.first[i].gastos[j].empresa.name << " / " << GRAPH.first[i].gastos[j].empresa.id << ": " << endl;
-            /*print edge values*/
             for(int k = 0; k < GRAPH.first[i].gastos[j].transac.size();k++){
                 cout << "\t\t- " << GRAPH.first[i].gastos[j].transac[k].first << "  R$" << GRAPH.first[i].gastos[j].transac[k].second << endl;
             }
@@ -448,11 +336,6 @@ void printGrafo(){
     pressToContinue();
 }
 
-/**
- *  Print Deputies vertexes as a list of name / state / party
- *
- * @return void
- */
 void printdVertex(){
     for(int i = 0; i < GRAPH.first.size();i++){
         cout << i+1 << " - " << GRAPH.first[i].name << " " << GRAPH.first[i].state << " " << GRAPH.first[i].party << endl;
@@ -461,11 +344,6 @@ void printdVertex(){
     pressToContinue();
 }
 
-/**
- *  Print company vertexes as a list of name and id
- *
- * @return void
- */
 void printcVertex(){
     for(int i = 0; i < GRAPH.second.size();i++){
         cout << i+1 << " - " << GRAPH.second[i].name << " " << GRAPH.second[i].id << endl;
@@ -474,16 +352,6 @@ void printcVertex(){
     pressToContinue();
 }
 
-/**
- * Look for the existence of a edge.
- *
- *  @param r_desc the name of the edge being looked
- *  @param nome the name of the company vertex
- *  @param d_index the index of the deputy
- *
- * @return int i represents the index of the edge being looked
- * or -1 representing that there is no such edge
- */
 int edgeExistence(string r_desc, string nome, int d_index){
 
     for(int i = 0; i < GRAPH.first[d_index].gastos.size();i++){
@@ -495,16 +363,6 @@ int edgeExistence(string r_desc, string nome, int d_index){
     return -1;
 }
 
-/**
- *  Look for the existence of a vertex.
- *
- *  @param deputyOrCompany int value representing if it is a deputy or
- *      company being looked
- *  @param name string the name of the deputy or company
- *
- * @return int i represents the index of the vertex being looked
- * or -1 representing that there is no such vertex
- */
 int nameExistence(int deputyOrCompany, string name){
     if(deputyOrCompany == 0){
         for(int i = 0; i < GRAPH.first.size();i++){
@@ -523,15 +381,6 @@ int nameExistence(int deputyOrCompany, string name){
     return -1;
 }
 
-/**
- * Add a deputy vertex on the graph
- *
- *  @param r_desc the name of the edge being looked
- *  @param nome the name of the company vertex
- *  @param d_index the index of the deputy
- *
- * @return int indexOfNode represents the index of the vertex
- */
 int add_dVertex(string d_name, string d_state, string d_party){
     int indexOfNode;
 
@@ -549,15 +398,6 @@ int add_dVertex(string d_name, string d_state, string d_party){
 
 }
 
-/**
- * Add a company vertex on the graph
- *
- *  @param r_desc the name of the edge being looked
- *  @param nome the name of the company vertex
- *  @param d_index the index of the deputy
- *
- * @return int indexOfNode represents the index of the vertex
- */
 int add_cVertex(string c_name, string c_id){
     int indexOfNode;
 
@@ -574,30 +414,17 @@ int add_cVertex(string c_name, string c_id){
     return indexOfNode;
 }
 
-/**
- * Create an edge between a given deputy vertex and a company vertex
- *
- *  @param r_desc the name of the expanse of edge
- *  @param r_date the date of the expanse
- *  @param r_value the value of the expanse
- *  @param dVertex the index of the deputy vertex
- *  @param cVertex the index of the company vertex
- *
- * @return int 0 represents good exit, -1 represents bad exit
- */
 void add_rEdge(string r_desc, string r_date, float r_value, int dVertex, int cVertex){
     int indexOfNode;
 
     indexOfNode = edgeExistence(r_desc, GRAPH.second[cVertex].name, dVertex);
 
-    /* If expanse type edge does not exist, create one for it*/
     if(indexOfNode == -1){
         struct rEdge edge;
         edge.tipoT = r_desc;
         edge.transac.push_back(make_pair(r_date, r_value));
         edge.empresa = GRAPH.second[cVertex];
         GRAPH.first[dVertex].gastos.push_back(edge);
-    /* Else, put the date and value of the expanse in the correspondent edge */
     } else {
         GRAPH.first[dVertex].gastos[indexOfNode].transac.push_back(make_pair(r_date, r_value));
     }
@@ -606,11 +433,6 @@ void add_rEdge(string r_desc, string r_date, float r_value, int dVertex, int cVe
 
 
 
-/**
- * Read the text file and create the GRAPH.
- *
- * @return int 0 represents good exit, -1 represents bad exit
- */
 int readFile(){
     FILE *pF;
     float r_value;
@@ -645,13 +467,6 @@ int readFile(){
 }
 
 
-/**
- * Main function.
- *  Reads and loads basic data, then executes all main functionalities
- *  of the program.
- *
- * @return int 0 represents good exit, -1 represents bad exit
- */
 int main(){
 
     loadingUI();
