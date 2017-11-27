@@ -31,55 +31,6 @@ void findParty(){
 
 }
 
-void findState(){
-  string state;
-  float totalValue = 0;
-  cin >> state;
-  transform(state.begin(), state.end(),state.begin(), ::toupper);
-
-  for(int i = 0; i < GRAPH.first.size();i++){
-    if(state.compare(GRAPH.first[i].state) == 0){
-      cout << i+1 << " - " << GRAPH.first[i].name << " / " << GRAPH.first[i].state << " / " << GRAPH.first[i].party << endl;
-      for(int j = 0; j < GRAPH.first[i].gastos.size();j++){
-	cout << "\t-" << GRAPH.first[i].gastos[j].tipoT << " na empresa " \
-        << GRAPH.first[i].gastos[j].empresa.name << " / " << GRAPH.first[i].gastos[j].empresa.id << ": " << endl;
-	for(int k = 0; k < GRAPH.first[i].gastos[j].transac.size();k++){
-	  cout << "\t\t- " << GRAPH.first[i].gastos[j].transac[k].first << "  R$" \
-          << GRAPH.first[i].gastos[j].transac[k].second << endl;
-	  totalValue += GRAPH.first[i].gastos[j].transac[k].second;
-	}
-      }
-    }
-  }
-
-  cout << endl << endl << ">>>> GASTOS TOTAIS: R$" << fixed << setprecision(2) << totalValue << endl;
-
-
-}
-
-void findDeputy(){
-  int id;
-  float totalValue = 0;
-
-  cin >> id;
-
-  cout << "\tNOME: " << GRAPH.first[id-1].name << endl;
-
-  for(int j = 0; j < GRAPH.first[id-1].gastos.size();j++){
-    cout << "\t-" << GRAPH.first[id-1].gastos[j].tipoT << " na empresa " \
-        << GRAPH.first[id-1].gastos[j].empresa.name << " / " << GRAPH.first[id-1].gastos[j].empresa.id << ": " << endl;
-    for(int k = 0; k < GRAPH.first[id-1].gastos[j].transac.size();k++){
-      cout << "\t\t- " << GRAPH.first[id-1].gastos[j].transac[k].first << "  R$" \
-          << GRAPH.first[id-1].gastos[j].transac[k].second << endl;
-      totalValue += GRAPH.first[id-1].gastos[j].transac[k].second;
-    }
-  }
-
-  cout << endl << endl << ">>>> GASTOS TOTAIS: R$" << fixed << setprecision(2) <<totalValue << endl;
-
-
-}
-
 
 void printAnomalies(){
   createCommunities();
@@ -247,8 +198,6 @@ void add_rEdge(string r_desc, string r_date, float r_value, int dVertex, int cVe
 
 }
 
-
-
 int readFile(){
   FILE *pF;
   float r_value;
@@ -282,10 +231,11 @@ int readFile(){
 
 }
 
-
 int main(){
   readFile();
   printAnomalies();
+  printf("\nGrafo: \n\n\n\n");
+  printGrafo();
 
   return 0;
 }
