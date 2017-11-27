@@ -29,6 +29,7 @@ OBJ_FILES = $(addprefix $(BIN_PATH)/,$(notdir $(CPP_FILES:.cpp=.o)))
 DEP_FILES = $(wildcard $(DEP_PATH)/*.d)
 
 EXEC = trabalho.out
+OUTFILE = out.txt
 
 # Caso o Sistema Operacional seja Windows, modifica-se as seguintes variáveis:
 ifeq ($(OS),Windows_NT)
@@ -69,6 +70,7 @@ endif
 clean:
 	$(RMDIR) $(BIN_PATH) $(DEP_PATH)
 	$(RM) $(EXEC)	
+	$(RM) $(OUTFILE)
 
 # Regra que estabelece que arquivos .d são "preciosos"
 .PRECIOUS: $(DEP_PATH)/%.d

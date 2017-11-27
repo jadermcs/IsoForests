@@ -234,13 +234,14 @@ int main(){
   ofstream out("out.txt");
   streambuf *coutbuf = cout.rdbuf();
   cout.rdbuf(out.rdbuf());
+  cout << "Anomalias: \n\n\n\n";
   readFile();
   printAnomalies();
   cout << "\nGrafo: \n\n\n\n";
   printGrafo();
   std::cout.rdbuf(coutbuf);
 
-  cout << "[------------RESULTADO SALVO EM 'out.txt'------------]" << endl;
+  cout << "\n\n\n[------------RESULTADO SALVO EM 'out.txt'------------]\n\n\n";
 
   return 0;
 }
