@@ -50,7 +50,7 @@ void calcAnomalies(){
 
   for(int i = 0; i < (long long) GRAPH.first.size();i++)
     {
-      N = GRAPH.first[i].gastos.size();
+      N = (long long) GRAPH.first[i].gastos.size();
       sum = COM[GRAPH.first[i].name];
       md = sum/N;
       var = big = 0.0;
