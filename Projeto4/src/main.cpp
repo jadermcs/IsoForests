@@ -204,7 +204,7 @@ int readFile(){
   char d_name[500], d_state[500], d_party[500], c_name[500], c_id[500], r_date[500], r_desc[500];
   string sd_name, sd_state, sd_party, sc_name, sc_id, sr_date, sr_desc;
 
-  pF = fopen("dirty_deputies.txt", "r");
+  pF = fopen("in.txt", "r");
 
   if(pF == NULL){
     printf("Error on open the file.\n");
