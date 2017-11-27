@@ -1,2 +1,0 @@
-sudo make || exit
-./main
