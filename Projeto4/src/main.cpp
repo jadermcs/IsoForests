@@ -1,7 +1,6 @@
 #include "isof.h"
 
 
-
 void findParty(){
   string party;
   float totalValue = 0;
@@ -232,10 +231,16 @@ int readFile(){
 }
 
 int main(){
+  ofstream out("out.txt");
+  streambuf *coutbuf = cout.rdbuf();
+  cout.rdbuf(out.rdbuf());
   readFile();
   printAnomalies();
-  printf("\nGrafo: \n\n\n\n");
+  cout << "\nGrafo: \n\n\n\n";
   printGrafo();
+  std::cout.rdbuf(coutbuf);
+
+  cout << "[------------RESULTADO SALVO EM 'out.txt'------------]" << endl;
 
   return 0;
 }
