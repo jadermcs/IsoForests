@@ -231,17 +231,28 @@ int readFile(){
 }
 
 int main(){
+  ifstream ifs;
   ofstream out("out.txt");
   streambuf *coutbuf = cout.rdbuf();
   cout.rdbuf(out.rdbuf());
-  cout << "Anomalias: \n\n\n\n";
+  cout << "Anomalias: \n\n";
   readFile();
   printAnomalies();
-  cout << "\nGrafo: \n\n\n\n";
+  cout << "\nGrafo: \n\n";
   printGrafo();
-  std::cout.rdbuf(coutbuf);
+  cout.rdbuf(coutbuf);
 
-  cout << "\n\n\n[------------RESULTADO SALVO EM 'out.txt'------------]\n\n\n";
+  ifs.open("out.txt");
+  char c = ifs.get();
+
+  while (ifs.good()) {
+    cout << c;
+    c = ifs.get();
+  }
+
+  ifs.close();
+
+  cout << "\n[------------RESULTADO SALVO EM 'out.txt'------------]\n";
 
   return 0;
 }
