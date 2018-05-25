@@ -1,4 +1,4 @@
-# Isoforests
+# IsoForests
 Isolation Forest Algorithm.
 
 Return the anomaly score of each sample using the IsolationForest algorithm.
